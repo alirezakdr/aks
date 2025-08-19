@@ -101,7 +101,12 @@ async def on_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await query.message.reply_text(f"عکس پیدا نشد: {image_ref}")
             else:
                 with open(image_ref, "rb") as f:
-                    await query.message.reply_photo(photo=InputFile(f), caption=caption)
+                    await query.message.reply_photo(
+    photo=InputFile(f),
+    caption=caption,
+    reply_markup=products_keyboard(brand)   # منوی محصولات همون برند دوباره زیر عکس
+)
+
         return
 
     if data == "back::brands":
@@ -122,7 +127,12 @@ async def on_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await update.message.reply_text(f"عکس پیدا نشد: {image_ref}")
             else:
                 with open(image_ref, "rb") as f:
-                    await update.message.reply_photo(photo=f, caption=caption)
+                    await update.message.reply_photo(
+    photo=f,
+    caption=caption,
+    reply_markup=products_keyboard(product["brand"])   # منوی برند هم همراه عکس بیاد
+)
+
         return
     await update.message.reply_text("ابتدا برند را انتخاب کن:", reply_markup=brand_keyboard())
 
