@@ -110,8 +110,9 @@ async def on_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     if data == "back::brands":
-        await start(update, context)
-        return
+    await query.message.reply_text("سلام! دوباره یک برند را انتخاب کن ⬇️", reply_markup=brand_keyboard(), parse_mode="Markdown")
+    return
+
 
 async def on_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # If user types a product name directly (any brand), send its photo
